@@ -101,21 +101,12 @@ public class GameInterface {
      */
     public static void endTurn() {
         MyBotMod.logger.info("Ending turn");
-        // 方法1: 尝试使用 InputAction（推荐）
+        // 使用 EndTurnAction
         try {
             com.megacrit.cardcrawl.actions.common.EndTurnAction action = new com.megacrit.cardcrawl.actions.common.EndTurnAction();
             AbstractDungeon.actionManager.addToBottom(action);
         } catch (Exception e) {
             MyBotMod.logger.warn("Failed to use EndTurnAction: " + e.getMessage());
-            // 方法2: 尝试触发按钮
-            try {
-                java.lang.reflect.Field hbField = com.megacrit.cardcrawl.ui.buttons.EndTurnButton.class.getDeclaredField("hb");
-                hbField.setAccessible(true);
-                com.badlogic.gdx.scenes.scene2d.ui.ClickableButton hb = (com.badlogic.gdx.scenes.scene2d.ui.ClickableButton) hbField.get(AbstractDungeon.overlayMenu.endTurnButton);
-                hb.clicked = true;
-            } catch (Exception ex) {
-                MyBotMod.logger.error("Failed to click end turn button: " + ex.getMessage());
-            }
         }
     }
 
