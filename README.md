@@ -1,224 +1,147 @@
-# STS Bot Mod
+# STS Bot Mod - 自动打牌AI
 
-An AI-powered bot that can automatically play Slay the Spire using game mods and rule-based decision making.
+一个用于 Slay the Spire 的 AI Bot，可以自动打牌、选择卡牌、管理资源。
 
-## 🎯 Features
+## 🚀 快速开始（3步搞定）
 
-- ✅ Automatic gameplay with rule-based AI
-- ✅ Real-time game state extraction
-- ✅ Extensible AI agent system
-- ✅ Debug mode with detailed logging
-- ✅ Simple toggle for auto-play
+### 步骤1：准备文件（2分钟）
 
-## 📋 Requirements
+1. 拉取最新代码：
+   ```bash
+   git pull origin main
+   ```
 
-- **Java 8** or higher
-- **Maven** for building
-- **Slay the Spire** (Steam or GOG version)
-- **ModTheSpire** - External mod loader
-- **BaseMod** - Modding framework
+2. 把 `desktop-1.0.jar` 放到 `libs/` 文件夹
+   - 从游戏目录复制：`C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar`
 
-## 🚀 Installation
+3. 检查 `libs/` 文件夹应该有：
+   - ✅ `BaseMod.jar` （已有）
+   - ✅ `desktop-1.0.jar` （你放置的）
 
-### Step 1: Install Dependencies
+### 步骤2：一键编译（1分钟）
 
-1. **Download ModTheSpire**
-   - Go to: https://github.com/kiooeht/ModTheSpire/releases
-   - Download the latest `ModTheSpire.jar`
-   - Copy to your Slay the Spire installation directory
-
-2. **Download BaseMod**
-   - Go to: https://github.com/SkyeStarfall/BaseMod/releases
-   - Download the latest `BaseMod.jar`
-   - Copy to the `mods` folder in your Slay the Spire directory
-
-### Step 2: Build the Bot Mod
-
-```bash
-# Clone the repository
-git clone https://github.com/Eisem/slaythespire.git
-cd slaythespire
-
-# Create libs directory for game dependencies
-mkdir -p libs
-
-# Copy game JARs to libs directory (see Setup Guide below)
-# - Copy desktop-1.0.jar from Slay the Spire directory
-# - Copy ModTheSpire.jar to libs
-# - Copy BaseMod.jar to libs
-
-# Build with Maven
-mvn clean package
-
-# The compiled JAR will be in target/sts-bot-mod-1.0.0.jar
+直接双击运行：
+```
+compile.bat
 ```
 
-### Step 3: Install the Mod
+脚本会自动：
+- ✓ 检查依赖
+- ✓ 编译项目
+- ✓ 复制JAR到游戏目录
 
-1. Copy `target/sts-bot-mod-1.0.0.jar` to the `mods` folder
-2. Run the game using ModTheSpire:
-   - Windows: `MTS.cmd`
-   - Linux: `MTS.sh`
+### 步骤3：启用自动打牌（1分钟）
 
-## 🎮 Usage
+在游戏中按 `` ` `` 打开控制台，输入：
+```java
+bot.MyBotMod.setAutoPlayEnabled(true)
+```
 
-### Enabling Auto-Play
+---
 
-The mod currently has auto-play **disabled by default**. To enable it:
+## ❓ 如果编译失败
 
-1. **Quick Method** - Edit code:
-   - Open `src/main/java/bot/MyBotMod.java`
-   - Find line 38: `private static boolean autoPlayEnabled = false;`
-   - Change to: `private static boolean autoPlayEnabled = true;`
-   - Rebuild: `mvn clean package`
+### 问题：未找到Maven
+**解决：**
+- 下载 Maven：https://maven.apache.org/download.cgi
+- 解压到：`C:\Program Files\Apache\maven`
+- 添加环境变量：
+  - `MAVEN_HOME` = `C:\Program Files\Apache\maven`
+  - `PATH` 添加 `%MAVEN_HOME%\bin`
 
-2. **Console Method** (if using BaseMod console):
-   - Press backtick (`` ` ``) to open console
-   - Type: `bot.MyBotMod.setAutoPlayEnabled(true)`
+### 问题：未找到Java
+**解决：**
+- 下载 JDK 8：https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
+- 安装后重新运行 `compile.bat`
 
-### Debug Mode
+### 问题：使用IntelliJ IDEA编译（替代方案）
+1. 下载 IDEA：https://www.jetbrains.com/idea/download/（Community版，免费）
+2. File → Open → 选择项目文件夹
+3. File → Project Structure → Libraries → 点击 `+` → 选择 `libs/` 文件夹
+4. Build → Build Project (Ctrl+F9)
+5. 编译好的JAR在：`out/production/sts-bot-mod/`
 
-Debug mode is enabled by default and will:
-- Log all game state changes
-- Display AI decisions in console
-- Show detailed information about each action
+---
 
-To disable, set `debugMode = false` in `MyBotMod.java`.
-
-## 🏗️ Architecture
+## 📁 项目结构
 
 ```
 sts-bot-mod/
 ├── src/main/java/bot/
-│   ├── MyBotMod.java           # Mod entry point
-│   ├── GameState.java          # Game state management
-│   ├── GameInterface.java      # Game action interface
-│   ├── AIEngine.java           # AI decision engine
-│   ├── patches/                # Game hooks
+│   ├── MyBotMod.java          # Mod入口
+│   ├── GameState.java         # 游戏状态
+│   ├── GameInterface.java     # 游戏接口
+│   ├── AIEngine.java          # AI引擎
+│   ├── AIAgent.java           # AI接口
+│   ├── AIAction.java          # 动作定义
+│   ├── BotConfig.java         # 配置
+│   ├── patches/               # 游戏Hook
 │   │   ├── GameStatePatch.java
 │   │   ├── HandCardPatch.java
 │   │   ├── MonsterPatch.java
 │   │   └── AutoPlayPatch.java
-│   └── ai/                     # AI agents
-│       └── RuleBasedAgent.java # Rule-based AI
-└── src/main/resources/
-    └── mod.json                # Mod metadata
+│   └── ai/
+│       └── RuleBasedAgent.java # 规则AI
+├── libs/
+│   ├── BaseMod.jar           # BaseMod依赖
+│   └── desktop-1.0.jar       # 游戏依赖
+├── compile.bat               # 一键编译脚本
+└── README.md                 # 本文件
 ```
 
-## 🧠 How It Works
+---
 
-### 1. Game State Extraction
+## ⚙️ 功能特性
 
-The mod hooks into game events using **SpirePatch** to extract:
-- Player HP, energy, block
-- Hand cards
-- Monster information (HP, intent)
-- Dungeon state
+- ✅ 自动打牌（基于规则的AI）
+- ✅ 实时游戏状态提取
+- ✅ 调试模式显示详细日志
+- ✅ 可配置的AI参数
 
-### 2. Decision Making
+---
 
-The **RuleBasedAgent** uses a priority system:
+## 🎮 使用方法
 
-1. Calculate scores for all playable cards
-2. Consider card type, energy efficiency, and game state
-3. Select the highest-scoring card
-4. If no good cards, end turn
+1. 使用 ModTheSpire 启动游戏
+2. 勾选 BaseMod 和 sts-bot-mod
+3. 开始新游戏
+4. 在战斗中观察AI自动打牌
 
-### 3. Action Execution
+---
 
-The AI plays cards through the **GameInterface**:
-- Automatically selects targets
-- Manages energy usage
-- Handles special card types (AOE, self-target)
+## 📊 调试模式
 
-## 🔧 Development
+调试模式默认开启，控制台会显示：
+- 每张打出的卡牌
+- 怪物状态变化
+- AI决策过程
+- 游戏状态更新
 
-### Adding New AI Agents
+---
 
-Create a new class implementing `AIAgent`:
+## 🔧 配置
 
-```java
-package bot.ai;
+编辑 `BotConfig.java` 可以调整：
+- AI权重参数
+- 目标选择策略
+- 安全设置
+- 日志级别
 
-import bot.AIAction;
+---
 
-public class MyCustomAgent implements bot.AIAgent {
-    @Override
-    public AIAction decideAction() {
-        // Your custom logic here
-        return new AIAction(AIAction.ActionType.PLAY_CARD, "My logic", 0);
-    }
+## 📞 获取帮助
 
-    @Override
-    public void reset() {
-        // Reset state if needed
-    }
-}
+- GitHub仓库：https://github.com/Eisem/slaythespire
+- 提交问题：https://github.com/Eisem/slaythespire/issues
+
+---
+
+## ⏱️ 总时间
+
 ```
-
-### Adding New Game Hooks
-
-Create a new patch class in `patches/`:
-
-```java
-package bot.patches;
-
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
-
-@SpirePatch(clz = SomeClass.class, method = "someMethod")
-public class MyNewPatch {
-    @SpirePostfixPatch
-    public static void onSomeMethod(Object __instance) {
-        // Your hook logic here
-        bot.GameState.update();
-    }
-}
+准备文件：2分钟
+编译：1分钟
+启用：1分钟
+━━━━━━━━━━━━━━━━━
+总计：4分钟
 ```
-
-## 🐛 Troubleshooting
-
-### Mod not loading
-- Check that `mod.json` is in the correct location
-- Verify Java 8 is installed
-- Check console logs for errors
-
-### Auto-play not working
-- Verify `autoPlayEnabled` is set to `true`
-- Make sure you're in battle
-- Check that there are playable cards in hand
-
-### Compilation errors
-- Ensure all dependency JARs are in the `libs` folder
-- Verify Maven is installed correctly
-- Check Java version (must be 1.8)
-
-## 📚 Resources
-
-- [ModTheSpire Wiki](https://github.com/kiooeht/ModTheSpire/wiki)
-- [BaseMod Wiki](https://github.com/SkyeStarfall/BaseMod/wiki)
-- [SpirePatch Documentation](https://github.com/kiooeht/ModTheSpire/wiki/SpirePatch)
-- [Slay the Spire Modding Discord](https://discord.gg/slaythespiremods)
-
-## 🎯 Roadmap
-
-- [ ] Improve AI scoring system
-- [ ] Add deck tracking
-- [ ] Implement ML-based agent
-- [ ] Add UI for settings
-- [ ] Support multiple characters
-- [ ] Relic selection AI
-
-## 📄 License
-
-MIT License
-
-## 👥 Author
-
-Eisem
-
-## 🙏 Acknowledgments
-
-- [ModTheSpire](https://github.com/kiooeht/ModTheSpire) - Mod loader framework
-- [BaseMod](https://github.com/SkyeStarfall/BaseMod) - Modding utilities
-- The Slay the Spire modding community
