@@ -32,7 +32,7 @@ public class MonsterPatch {
     /**
      * Patch when a monster dies
      */
-    @SpirePatch(clz = AbstractMonster.class, method = "die")
+    @SpirePatch(clz = AbstractMonster.class, method = "die", paramtypez = {boolean.class})
     public static class OnMonsterDeath {
         @SpirePostfixPatch
         public static void onMonsterDeath(AbstractMonster __instance, boolean triggerRelics) {
