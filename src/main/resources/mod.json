@@ -1,0 +1,12 @@
+{
+  "modid": "sts-bot-mod",
+  "name": "STS Bot Mod",
+  "version": "1.0.0",
+  "author_list": ["Eisem"],
+  "description": "AI Bot for automated Slay the Spire gameplay",
+  "dependencies": [
+    "basemod",
+    "modthespire"
+  ],
+  "sts_version": "12-18-2024"
+}
