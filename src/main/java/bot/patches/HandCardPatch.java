@@ -21,7 +21,7 @@ public class HandCardPatch {
     @SpirePatch(clz = AbstractPlayer.class, method = "draw", paramtypez = {int.class})
     public static class OnCardsDrawn {
         @SpirePostfixPatch
-        public static void onCardsDrawn(int __result, int numCards) {
+        public static void onCardsDrawn(AbstractPlayer __instance, int numCards) {
             if (bot.MyBotMod.isDebugMode()) {
                 logger.info("Player drew " + numCards + " card(s)");
             }
