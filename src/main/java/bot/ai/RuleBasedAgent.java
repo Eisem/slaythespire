@@ -1,8 +1,9 @@
 package bot.ai;
 
 import bot.AIAction;
-import bot.AIEngine;
+import bot.AIAgent;
 import bot.GameState;
+import bot.MyBotMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +19,7 @@ import java.util.List;
  * This agent uses a priority-based system to decide which card to play.
  * Rules can be easily adjusted and expanded.
  */
-public class RuleBasedAgent implements bot.AIAgent {
+public class RuleBasedAgent implements AIAgent {
     private static final Logger logger = LogManager.getLogger(RuleBasedAgent.class);
 
     @Override

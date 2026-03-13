@@ -55,12 +55,7 @@ public class AIEngine {
             return false;
         }
 
-        // Check if any selection screen is active
-        if (GameInterface.isSelectingFromGrid()) {
-            MyBotMod.logger.debug("Grid selection active, canceling");
-            GameInterface.cancelSelection();
-            return false;
-        }
+
 
         // Get decision from current agent
         AIAction action = currentAgent.decideAction();
@@ -84,81 +79,5 @@ public class AIEngine {
             currentAgent.reset();
         }
         MyBotMod.logger.info("AI Engine reset");
-    }
-}
-
-/**
- * Interface for AI agents
- */
-public interface AIAgent {
-    /**
-     * Decide what action to take based on current game state
-     *
-     * @return The action to take, or null if no action
-     */
-    AIAction decideAction();
-
-    /**
-     * Reset agent state
-     */
-    void reset();
-}
-
-/**
- * AIAction - Represents a game action
- */
-public class AIAction {
-    public enum ActionType {
-        PLAY_CARD,
-        END_TURN,
-        USE_POTION,
-        SKIP
-    }
-
-    private final ActionType type;
-    private final String description;
-    private final Object data;
-
-    public AIAction(ActionType type, String description, Object data) {
-        this.type = type;
-        this.description = description;
-        this.data = data;
-    }
-
-    public ActionType getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    /**
-     * Execute this action
-     *
-     * @return true if action was successful
-     */
-    public boolean execute() {
-        switch (type) {
-            case PLAY_CARD:
-                if (data instanceof Integer) {
-                    GameInterface.playCardByIndex((Integer) data);
-                    return true;
-                }
-                break;
-            case END_TURN:
-                GameInterface.endTurn();
-                return true;
-            case SKIP:
-                return true;
-            default:
-                MyBotMod.logger.warn("Unknown action type: " + type);
-                return false;
-        }
-        return false;
     }
 }

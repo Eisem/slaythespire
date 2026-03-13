@@ -31,43 +31,17 @@ public class AutoPlayPatch {
     }
 
     /**
-     * Alternative patch that uses locator for more robust targeting
-     * This is more resilient to game updates
+     * Alternative patch that works with combat room
      */
     @SpirePatch(clz = com.megacrit.cardcrawl.rooms.AbstractRoom.class, method = "update")
     public static class CombatUpdatePatch {
-        @SpireInsertPatch(locator = CombatLocator.class)
+        @SpireInsertPatch(rloc = 50)
         public static void combatUpdate(com.megacrit.cardcrawl.rooms.AbstractRoom __instance) {
             // Check if we're in combat phase
             if (__instance.phase == com.megacrit.cardcrawl.rooms.AbstractRoom.RoomPhase.COMBAT) {
                 if (bot.MyBotMod.isAutoPlayEnabled()) {
                     bot.AIEngine.getInstance().makeDecision();
                 }
-            }
-        }
-
-        /**
-         * Locator to find the right place to insert our code
-         * This finds the line where monsters are updated in combat
-         */
-        private static class CombatLocator extends com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator {
-            @Override
-            public int[] Locate(com.evacipated.cardcrawl.modthespire.lib.spire.CtBehavior ctMethodToPatch)
-                throws com.evacipated.cardcrawl.modthespire.lib.spire.CannotCompileException,
-                   com.evacipated.cardcrawl.modthespire.lib.PatchingException {
-
-                // Find the line where monsters are updated
-                com.evacipated.cardcrawl.modthespire.lib.finders.Matcher finalMatcher =
-                    new com.evacipated.cardcrawl.modthespire.lib.finders.Matcher.MethodCallMatcher(
-                        com.megacrit.cardcrawl.dungeons.AbstractDungeon.class,
-                        "getMonsters"
-                    );
-
-                return com.evacipated.cardcrawl.modthespire.lib.finders.LineFinder.findInOrder(
-                    ctMethodToPatch,
-                    new java.util.ArrayList<>(),
-                    finalMatcher
-                );
             }
         }
     }

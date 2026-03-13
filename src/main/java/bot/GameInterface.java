@@ -101,7 +101,7 @@ public class GameInterface {
      */
     public static void endTurn() {
         MyBotMod.logger.info("Ending turn");
-        AbstractDungeon.overlayMenu.endTurnButton.clicked();
+        AbstractDungeon.overlayMenu.endTurnButton.hb.clicked = true;
     }
 
     /**

@@ -70,19 +70,17 @@ public class GameState {
                         monster.currentHealth,
                         monster.maxHealth,
                         monster.currentBlock,
-                        monster.getIntentDamage(),
-                        monster.getIntentBaseDmg(),
-                        monster.getIntent()
+                        0, // intentDamage - not available in all versions
+                        0, // intentBaseDamage - not available in all versions
+                        (byte) 0 // intent - not available in all versions
                     ));
                 }
             }
         }
 
         // Update dungeon info
-        if (AbstractDungeon.dungeon != null) {
-            dungeonName = AbstractDungeon.dungeon.name;
-            floorNumber = AbstractDungeon.floorNum;
-        }
+        dungeonName = AbstractDungeon.id;
+        floorNumber = AbstractDungeon.floorNum;
 
         if (MyBotMod.isDebugMode()) {
             logState();
