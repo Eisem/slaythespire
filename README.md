@@ -20,15 +20,19 @@
 
 ### 步骤2：一键编译（1分钟）
 
-直接双击运行：
-```
-compile.bat
-```
+**方法A：使用批处理脚本（推荐）**
 
-脚本会自动：
-- ✓ 检查依赖
-- ✓ 编译项目
-- ✓ 复制JAR到游戏目录
+双击运行 `compile.bat`
+
+如果没有任何反应，先运行 `diagnose.bat` 诊断环境问题
+
+**方法B：使用 IntelliJ IDEA（更简单，推荐）**
+
+1. 下载 IDEA：https://www.jetbrains.com/idea/download/（Community版，免费）
+2. File → Open → 选择项目文件夹
+3. File → Project Structure → Libraries → 点击 `+` → 选择 `libs/` 文件夹
+4. Build → Build Project (Ctrl+F9)
+5. 编译好的JAR在：`out/production/sts-bot-mod/`
 
 ### 步骤3：启用自动打牌（1分钟）
 
@@ -39,7 +43,13 @@ bot.MyBotMod.setAutoPlayEnabled(true)
 
 ---
 
-## ❓ 如果编译失败
+## ❓ 如果编译没有反应或失败
+
+### 问题：点击compile.bat没有任何反应
+
+**解决：**
+1. 先运行 `diagnose.bat` 查看环境配置
+2. 如果提示"未找到Maven"，请安装Maven或使用IntelliJ IDEA
 
 ### 问题：未找到Maven
 **解决：**
