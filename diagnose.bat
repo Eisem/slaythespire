@@ -23,6 +23,7 @@ echo libs 文件夹:
 if exist "libs" (
     echo [OK] libs 文件夹存在
     if exist "libs\BaseMod.jar" (echo [OK] BaseMod.jar) else (echo [X] BaseMod.jar 不存在)
+    if exist "libs\ModTheSpire.jar" (echo [OK] ModTheSpire.jar) else (echo [X] ModTheSpire.jar 不存在 - 需要下载！)
     if exist "libs\desktop-1.0.jar" (echo [OK] desktop-1.0.jar) else (echo [X] desktop-1.0.jar 不存在)
 ) else (
     echo [X] libs 文件夹不存在

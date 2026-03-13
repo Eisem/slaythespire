@@ -51,8 +51,22 @@ if not exist "libs\BaseMod.jar" (
 )
 echo [OK] BaseMod.jar 存在
 
+if not exist "libs\ModTheSpire.jar" (
+    echo [错误] 缺少 libs\ModTheSpire.jar
+    echo.
+    echo 请下载 ModTheSpire.jar：
+    echo 1. 访问 https://github.com/kiooeht/ModTheSpire/releases
+    echo 2. 下载最新的 ModTheSpire.jar
+    echo 3. 放到 libs\ 文件夹
+    echo.
+    echo 详细说明请查看 libs\MODTHESPIRE_README.md
+    pause
+    exit /b 1
+)
+echo [OK] ModTheSpire.jar 存在
+
 if not exist "libs\desktop-1.0.jar" (
-    echo [错误] 缺少 libs/desktop-1.0.jar
+    echo [错误] 缺少 libs\desktop-1.0.jar
     echo.
     echo 请从游戏目录复制：
     echo C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar

@@ -19,6 +19,15 @@
     </properties>
 
     <dependencies>
+        <!-- ModTheSpire - Required for SpirePatch annotations -->
+        <dependency>
+            <groupId>com.evacipated</groupId>
+            <artifactId>ModTheSpire</artifactId>
+            <version>3.6.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/ModTheSpire.jar</systemPath>
+        </dependency>
+
         <!-- BaseMod -->
         <dependency>
             <groupId>com.evacipated</groupId>

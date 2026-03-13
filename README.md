@@ -4,7 +4,7 @@
 
 ## 🚀 快速开始（3步搞定）
 
-### 步骤1：准备文件（2分钟）
+### 步骤1：准备文件（3分钟）
 
 1. 拉取最新代码：
    ```bash
@@ -14,9 +14,17 @@
 2. 把 `desktop-1.0.jar` 放到 `libs/` 文件夹
    - 从游戏目录复制：`C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar`
 
-3. 检查 `libs/` 文件夹应该有：
-   - ✅ `BaseMod.jar` （已有）
-   - ✅ `desktop-1.0.jar` （你放置的）
+3. 下载 `ModTheSpire.jar` 放到 `libs/` 文件夹
+   - 访问：https://github.com/kiooeht/ModTheSpire/releases
+   - 下载最新的 `ModTheSpire.jar`
+   - 放到 `libs/` 文件夹
+
+4. 检查 `libs/` 文件夹应该有：
+   - ✅ `BaseMod.jar` （已有，约1.3 MB）
+   - ✅ `ModTheSpire.jar` （需要下载，约100 KB）
+   - ✅ `desktop-1.0.jar` （你放置的，约100 MB）
+
+**详细下载说明：** 查看 `libs/MODTHESPIRE_README.md`
 
 ### 步骤2：一键编译（1分钟）
 
