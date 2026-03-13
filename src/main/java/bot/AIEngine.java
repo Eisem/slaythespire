@@ -90,7 +90,7 @@ public class AIEngine {
 /**
  * Interface for AI agents
  */
-interface AIAgent {
+public interface AIAgent {
     /**
      * Decide what action to take based on current game state
      *
@@ -107,7 +107,7 @@ interface AIAgent {
 /**
  * AIAction - Represents a game action
  */
-class AIAction {
+public class AIAction {
     public enum ActionType {
         PLAY_CARD,
         END_TURN,

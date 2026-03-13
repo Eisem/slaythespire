@@ -52,8 +52,8 @@ public class AutoPlayPatch {
          */
         private static class CombatLocator extends com.evacipated.cardcrawl.modthespire.lib.SpireInsertLocator {
             @Override
-            public int[] Locate(com.evacipated.cardcrawl.modthespire.lib.compiler.jassist.CtBehavior ctMethodToPatch)
-                throws com.evacipated.cardcrawl.modthespire.lib.compiler.jassist.CannotCompileException,
+            public int[] Locate(com.evacipated.cardcrawl.modthespire.lib.spire.CtBehavior ctMethodToPatch)
+                throws com.evacipated.cardcrawl.modthespire.lib.spire.CannotCompileException,
                    com.evacipated.cardcrawl.modthespire.lib.PatchingException {
 
                 // Find the line where monsters are updated

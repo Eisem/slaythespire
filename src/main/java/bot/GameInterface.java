@@ -1,10 +1,8 @@
 package bot;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.ui.GridSelectScreen;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.util.ArrayList;
@@ -156,24 +154,4 @@ public class GameInterface {
                !AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead();
     }
 
-    /**
-     * Check if a grid selection screen is active
-     *
-     * @return true if selecting from a grid (e.g., discard pile)
-     */
-    public static boolean isSelectingFromGrid() {
-        return AbstractDungeon.gridSelectScreen != null &&
-               AbstractDungeon.gridSelectScreen.selectedCards != null;
-    }
-
-    /**
-     * Cancel any active selections
-     */
-    public static void cancelSelection() {
-        if (isSelectingFromGrid()) {
-            GridSelectScreen screen = AbstractDungeon.gridSelectScreen;
-            screen.selectedCards.clear();
-            screen.cancelButton.clicked();
-        }
-    }
 }
