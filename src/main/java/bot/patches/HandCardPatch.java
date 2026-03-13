@@ -16,26 +16,12 @@ public class HandCardPatch {
     private static final Logger logger = LogManager.getLogger(HandCardPatch.class);
 
     /**
-     * Patch when cards are drawn
-     */
-    @SpirePatch(clz = AbstractPlayer.class, method = "draw", paramtypez = {int.class})
-    public static class OnCardsDrawn {
-        @SpirePostfixPatch
-        public static void onCardsDrawn(AbstractPlayer __instance, int numCards) {
-            if (bot.MyBotMod.isDebugMode()) {
-                logger.info("Player drew " + numCards + " card(s)");
-            }
-            bot.GameState.update();
-        }
-    }
-
-    /**
      * Patch when a card is played
      */
-    @SpirePatch(clz = AbstractPlayer.class, method = "useCard")
+    @SpirePatch(clz = AbstractPlayer.class, method = "useCard", paramtypez = {AbstractCard.class, AbstractMonster.class, int.class})
     public static class OnCardUsed {
         @SpirePostfixPatch
-        public static void onCardUsed(AbstractPlayer __instance, AbstractCard card) {
+        public static void onCardUsed(AbstractPlayer __instance, AbstractCard card, AbstractMonster monster, int energyOnUse) {
             if (bot.MyBotMod.isDebugMode()) {
                 logger.info("Player used card: " + card.name);
             }
